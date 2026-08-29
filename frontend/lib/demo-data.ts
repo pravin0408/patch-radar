@@ -3,7 +3,7 @@ import type { Patch, PatchListResponse, VendorStatus } from "./api";
 const DEMO_VENDORS: VendorStatus[] = [
   { id: "dell", display_name: "Dell EMC", status: "OK", last_success_at: new Date().toISOString(), consecutive_failures: 0 },
   { id: "cisco", display_name: "Cisco", status: "OK", last_success_at: new Date(Date.now() - 3600000).toISOString(), consecutive_failures: 0 },
-  { id: "netscaler", display_name: "NetScaler", status: "DEGRADED", last_success_at: new Date(Date.now() - 86400000).toISOString(), consecutive_failures: 3 },
+  { id: "netscaler", display_name: "NetScaler", status: "OK", last_success_at: new Date(Date.now() - 3600000).toISOString(), consecutive_failures: 0 },
   { id: "hpe", display_name: "HPE", status: "OK", last_success_at: new Date(Date.now() - 7200000).toISOString(), consecutive_failures: 0 },
   { id: "vmware", display_name: "VMware", status: "OK", last_success_at: new Date(Date.now() - 1000000).toISOString(), consecutive_failures: 0 },
   { id: "paloalto", display_name: "Palo Alto Networks", status: "OK", last_success_at: new Date(Date.now() - 2000000).toISOString(), consecutive_failures: 0 },
