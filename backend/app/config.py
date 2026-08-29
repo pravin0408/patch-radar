@@ -14,6 +14,11 @@ class Settings(BaseSettings):
     hpe_sdr_base_url: str = "https://support.hpe.com/hpesc/public/sdr"
     netscaler_bulletin_rss_url: str = "https://support.citrix.com/csaf/rss"
 
+    # Additional Enterprise Vendor Feeds (Phase 3)
+    vmware_advisories_url: str = "https://www.vmware.com/security/advisories.xml"
+    paloalto_api_url: str = "https://security.paloaltonetworks.com/api/v1/advisories"
+    fortinet_rss_url: str = "https://fortiguard.fortinet.com/rss/ir.xml"
+    
     ingestion_interval_hours: int = 6
     auth_disabled: bool = True
 

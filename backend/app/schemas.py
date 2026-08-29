@@ -9,7 +9,7 @@ from pydantic import BaseModel, Field
 class CanonicalPatch(BaseModel):
     """The single normalized shape every vendor adapter must produce."""
 
-    vendor: str  # 'dell' | 'cisco' | 'netscaler' | 'hpe'
+    vendor: str  # 'dell' | 'cisco' | 'netscaler' | 'hpe' | 'vmware' | 'paloalto' | 'fortinet' | 'f5'
     model: str
     component_type: str
     version_raw: str

@@ -8,6 +8,10 @@ const VENDORS = [
   { value: "cisco", label: "Cisco" },
   { value: "netscaler", label: "NetScaler" },
   { value: "hpe", label: "HPE" },
+  { value: "vmware", label: "VMware" },
+  { value: "paloalto", label: "Palo Alto" },
+  { value: "fortinet", label: "Fortinet" },
+  { value: "f5", label: "F5 Networks" },
 ];
 
 const SEVERITIES = [

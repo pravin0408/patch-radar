@@ -52,6 +52,23 @@ _VENDOR_FAMILIES: dict[str, dict[str, tuple[str, str]]] = {
         "3PAR": ("3PAR StoreServ", "Storage"),
         "Alletra": ("Alletra", "Storage"),
     },
+    "vmware": {
+        "vSphere": ("vSphere", "Hypervisor"),
+        "vCenter": ("vCenter", "Management"),
+        "ESXi": ("ESXi", "Hypervisor"),
+        "NSX": ("NSX", "Networking"),
+    },
+    "paloalto": {
+        "PAN-OS": ("PAN-OS", "Firewall"),
+        "Panorama": ("Panorama", "Management"),
+    },
+    "fortinet": {
+        "FortiOS": ("FortiGate", "Firewall"),
+        "FortiClient": ("FortiClient", "Endpoint"),
+    },
+    "f5": {
+        "BIG-IP": ("BIG-IP", "ADC"),
+    },
 }
 
 

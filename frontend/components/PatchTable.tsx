@@ -6,6 +6,10 @@ const VENDOR_LABELS: Record<string, string> = {
   cisco: "Cisco",
   netscaler: "NetScaler",
   hpe: "HPE",
+  vmware: "VMware",
+  paloalto: "Palo Alto",
+  fortinet: "Fortinet",
+  f5: "F5 Networks",
 };
 
 export default function PatchTable({ patches }: { patches: Patch[] }) {
