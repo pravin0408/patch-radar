@@ -35,10 +35,17 @@ def test_normalize_version_cisco():
     assert v1 < v2
 
 
-def test_normalize_version_hpe():
-    v1 = normalize_version("hpe", "1.50")
-    v2 = normalize_version("hpe", "1.62")
+def test_normalize_version_vmware_update_format():
+    v1 = normalize_version("vmware", "7.0.3")
+    v2 = normalize_version("vmware", "8.0")
+    v3 = normalize_version("vmware", "8.0 U1")
+    v4 = normalize_version("vmware", "8.0 U2")
+    v5 = normalize_version("vmware", "8.0 U2d")
+    
     assert v1 < v2
+    assert v2 < v3
+    assert v3 < v4
+    assert v4 < v5
 
 
 def test_normalize_version_strips_whitespace():
