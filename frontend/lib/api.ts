@@ -55,18 +55,67 @@ export async function fetchPatches(filters: PatchFilters): Promise<PatchListResp
   params.set("offset", String(filters.offset ?? 0));
 
   try {
-    const res = await fetch(`${API_BASE}/patches?${params.toString()}`, {
+    // PRIMARY: Try new real-time 2026 CVE database endpoint first
+    const res = await fetch(`${API_BASE}/cve/safe-versions`, {
       cache: "no-store",
     });
     if (!res.ok) {
       throw new Error(`HTTP error! status: ${res.status}`);
     }
-    return await res.json();
+    
+    const cveData = await res.json();
+    let patches = cveData.safe_versions || [];
+    
+    // Apply client-side filtering to match the PatchFilters interface
+    if (filters.vendor) {
+      patches = patches.filter((p: any) => p.vendor === filters.vendor);
+    }
+    if (filters.severity) {
+      patches = patches.filter((p: any) => 
+        (p.status?.includes("CRITICAL") && filters.severity === "CRITICAL") ||
+        (p.status?.includes("HIGH") && filters.severity === "HIGH") ||
+        (p.status?.includes("MEDIUM") && filters.severity === "MEDIUM") ||
+        (p.status?.includes("LOW") && filters.severity === "LOW")
+      );
+    }
+    if (filters.model) {
+      const search = filters.model.toLowerCase();
+      patches = patches.filter((p: any) => 
+        p.product?.toLowerCase().includes(search)
+      );
+    }
+
+    // Convert CVE database format to PatchListResponse format
+    const results: Patch[] = patches.map((patch: any) => ({
+      vendor: patch.vendor,
+      model: patch.product || "Unknown",
+      component_type: "Firmware/OS",
+      version: patch.version,
+      release_date: patch.release_date,
+      severity: patch.cves && patch.cves.length > 0 ? "CRITICAL" : null,
+      cves: patch.cves || [],
+      advisory_url: patch.advisory_url,
+      download_url: null,
+      requires_entitlement: true,
+      is_latest: true,
+      is_recommended: !patch.cves || patch.cves.length === 0
+    }));
+
+    const limit = filters.limit || 50;
+    const offset = filters.offset || 0;
+    const paginatedResults = results.slice(offset, offset + limit);
+
+    return {
+      count: paginatedResults.length,
+      total: results.length,
+      limit,
+      offset,
+      results: paginatedResults
+    };
   } catch (err) {
-    console.warn("Backend unavailable, using demo data for patches", err);
+    console.warn("Real-time CVE database unavailable, using demo data", err);
     return fetchDemoPatches(filters);
   }
-}
 
 export async function fetchVendorStatus(): Promise<VendorStatus[]> {
   try {
