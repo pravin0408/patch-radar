@@ -1,0 +1,45 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\Pravin Patil\AppData\Local\Programs\Python\Python314\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Pravin Patil\Documents\Default Project\patch-radar\patch-radar\backend
+plugins: anyio-4.14.2, asyncio-1.4.0
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 35 items
+
+tests/test_auth.py::test_create_and_verify_token PASSED                  [  2%]
+tests/test_auth.py::test_verify_token_expired PASSED                     [  5%]
+tests/test_auth.py::test_verify_token_invalid_signature PASSED           [  8%]
+tests/test_auth.py::test_verify_token_invalid_format PASSED              [ 11%]
+tests/test_auth.py::test_create_token_different_roles PASSED             [ 14%]
+tests/test_normalizer.py::test_normalize_version_sorts_correctly_dell PASSED [ 17%]
+tests/test_normalizer.py::test_normalize_version_netscaler_build_format PASSED [ 20%]
+tests/test_normalizer.py::test_normalize_version_netscaler_same_major PASSED [ 22%]
+tests/test_normalizer.py::test_normalize_version_cisco PASSED            [ 25%]
+tests/test_normalizer.py::test_normalize_version_vmware_update_format PASSED [ 28%]
+tests/test_normalizer.py::test_normalize_version_strips_whitespace PASSED [ 31%]
+tests/test_normalizer.py::test_normalize_version_see_advisory_placeholder PASSED [ 34%]
+tests/test_normalizer.py::test_map_severity_from_label PASSED            [ 37%]
+tests/test_normalizer.py::test_map_severity_from_cvss_score PASSED       [ 40%]
+tests/test_normalizer.py::test_map_severity_boundary_values PASSED       [ 42%]
+tests/test_normalizer.py::test_map_severity_unknown_string PASSED        [ 45%]
+tests/test_normalizer.py::test_verify_checksum_no_checksum_passes PASSED [ 48%]
+tests/test_normalizer.py::test_verify_checksum_mismatch_fails PASSED     [ 51%]
+tests/test_normalizer.py::test_verify_checksum_match_passes PASSED       [ 54%]
+tests/test_normalizer.py::test_verify_checksum_case_insensitive PASSED   [ 57%]
+tests/test_normalizer.py::test_dedup_collapses_duplicates PASSED         [ 60%]
+tests/test_normalizer.py::test_dedup_keeps_different_versions PASSED     [ 62%]
+tests/test_normalizer.py::test_dedup_keeps_different_components PASSED   [ 65%]
+tests/test_normalizer.py::test_dedup_last_wins PASSED                    [ 68%]
+tests/test_normalizer.py::test_dedup_empty_list PASSED                   [ 71%]
+tests/test_normalizer.py::test_netscaler_build_regex PASSED              [ 74%]
+tests/test_normalizer.py::test_netscaler_cve_regex PASSED                [ 77%]
+tests/test_normalizer.py::test_canonical_patch_defaults PASSED           [ 80%]
+tests/test_normalizer.py::test_canonical_patch_all_fields PASSED         [ 82%]
+tests/test_webhooks.py::test_format_slack_structure PASSED               [ 85%]
+tests/test_webhooks.py::test_format_slack_caps_at_10 PASSED              [ 88%]
+tests/test_webhooks.py::test_format_teams_structure PASSED               [ 91%]
+tests/test_webhooks.py::test_format_pagerduty_structure PASSED           [ 94%]
+tests/test_webhooks.py::test_format_generic_structure PASSED             [ 97%]
+tests/test_webhooks.py::test_format_generic_includes_all_fields PASSED   [100%]
+
+============================= 35 passed in 1.51s ==============================

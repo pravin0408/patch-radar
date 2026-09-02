@@ -39,6 +39,13 @@ from app.schemas import (
     TokenResponse,
     VendorStatusOut,
 )
+from app.cve_database_2026 import (
+    CVE_DATABASE_2026,
+    get_safe_versions,
+    get_vulnerable_versions,
+    get_version_cve_details,
+)
+from app.cve_endpoints import router as cve_router
 
 logger = logging.getLogger("patch_radar.api")
 
@@ -63,6 +70,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include CVE verification endpoints
+app.include_router(cve_router)
 
 
 # ---------------------------------------------------------------------------
