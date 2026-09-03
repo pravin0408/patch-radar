@@ -378,7 +378,7 @@ export function generateCVETrackerCSV(): string {
   return csv;
 }
 
-export function getAssetsByBusiness Unit(): Record<string, CorporateAsset[]> {
+export function getAssetsByBusinessUnit(): Record<string, CorporateAsset[]> {
   const grouped: Record<string, CorporateAsset[]> = {};
   
   CORPORATE_ASSETS.forEach(asset => {
