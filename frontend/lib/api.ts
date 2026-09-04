@@ -116,6 +116,7 @@ export async function fetchPatches(filters: PatchFilters): Promise<PatchListResp
     console.warn("Real-time CVE database unavailable, using demo data", err);
     return fetchDemoPatches(filters);
   }
+}
 
 export async function fetchVendorStatus(): Promise<VendorStatus[]> {
   try {
