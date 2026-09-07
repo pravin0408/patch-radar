@@ -288,8 +288,6 @@ export function getPortfolioSummary(): PortfolioSummary {
 
 export function generateCSVData(): string {
   const headers = [
-    "Asset ID",
-    "Asset Name",
     "Vendor",
     "Product",
     "Current Version",
@@ -306,8 +304,6 @@ export function generateCSVData(): string {
   ];
 
   const rows = CORPORATE_ASSETS.map(asset => [
-    asset.asset_id,
-    asset.asset_name,
     asset.vendor,
     asset.product,
     asset.current_version,
@@ -334,8 +330,6 @@ export function generateCSVData(): string {
 export function generateCVETrackerCSV(): string {
   const headers = [
     "CVE ID",
-    "Asset ID",
-    "Asset Name",
     "Vendor",
     "Product",
     "Current Version",
@@ -354,8 +348,6 @@ export function generateCVETrackerCSV(): string {
       asset.cves.forEach(cve => {
         rows.push([
           cve,
-          asset.asset_id,
-          asset.asset_name,
           asset.vendor,
           asset.product,
           asset.current_version,

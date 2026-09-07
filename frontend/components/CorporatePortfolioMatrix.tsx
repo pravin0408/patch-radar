@@ -62,8 +62,8 @@ export default function CorporatePortfolioMatrix() {
     const matchesVendor = !filterVendor || asset.vendor === filterVendor;
     const matchesStatus = !filterStatus || asset.status === filterStatus;
     const matchesSearch = !searchTerm || 
-      asset.asset_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      asset.asset_id.toLowerCase().includes(searchTerm.toLowerCase());
+      asset.vendor.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      asset.product.toLowerCase().includes(searchTerm.toLowerCase());
     
     return matchesSeverity && matchesVendor && matchesStatus && matchesSearch;
   });
@@ -144,7 +144,7 @@ export default function CorporatePortfolioMatrix() {
               <div className="flex-1">
                 <input
                   type="text"
-                  placeholder="Search assets by name or ID..."
+                  placeholder="Search by Vendor or Product..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full px-4 py-2 bg-gray-900 border border-gray-700 rounded text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
@@ -220,17 +220,17 @@ export default function CorporatePortfolioMatrix() {
           </div>
         </div>
 
-        {/* Vulnerable Assets Alert */}
+        {/* Vulnerable Alerts */}
         {vulnerable_assets.length > 0 && (
           <div className="bg-red-950/30 border border-red-900 rounded-lg p-4 mb-6">
             <div className="flex items-start gap-3">
               <span className="text-2xl">⚠️</span>
               <div className="flex-1">
-                <h3 className="font-bold text-red-400 mb-2">{vulnerable_assets.length} Assets Require Immediate Attention</h3>
+                <h3 className="font-bold text-red-400 mb-2">{vulnerable_assets.length} Systems Require Immediate Attention</h3>
                 <div className="flex flex-wrap gap-2">
                   {vulnerable_assets.slice(0, 5).map(asset => (
-                    <span key={asset.asset_id} className="text-xs bg-red-900 px-2 py-1 rounded">
-                      {asset.asset_name}: {asset.cve_count} CVE{asset.cve_count > 1 ? 's' : ''}
+                    <span key={asset.asset_id} className="text-xs bg-red-900 px-2 py-1 rounded border border-red-800">
+                      {asset.vendor} {asset.product}: {asset.cve_count} CVE{asset.cve_count > 1 ? 's' : ''}
                     </span>
                   ))}
                   {vulnerable_assets.length > 5 && (
@@ -242,13 +242,12 @@ export default function CorporatePortfolioMatrix() {
           </div>
         )}
 
-        {/* Asset Matrix Table */}
+        {/* Matrix Table */}
         <div className="bg-gray-800/30 border border-gray-700 rounded-lg overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="bg-gray-900/80 border-b border-gray-700">
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">Asset</th>
                   <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">Vendor</th>
                   <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">Current</th>
                   <th className="px-4 py-3 text-left text-xs font-semibold text-gray-300">Latest Safe</th>
@@ -262,10 +261,9 @@ export default function CorporatePortfolioMatrix() {
                 {filteredAssets.map((asset) => (
                   <tr key={asset.asset_id} className="hover:bg-gray-700/20 transition">
                     <td className="px-4 py-3 text-sm">
-                      <div className="font-mono text-gray-300">{asset.asset_id}</div>
-                      <div className="text-xs text-gray-500">{asset.asset_name}</div>
+                      <div className="font-semibold text-gray-200">{asset.vendor}</div>
+                      <div className="text-xs text-gray-400">{asset.product}</div>
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-300">{asset.vendor}</td>
                     <td className="px-4 py-3 text-sm font-mono text-gray-300">{asset.current_version}</td>
                     <td className="px-4 py-3 text-sm font-mono text-green-400">{asset.latest_safe_version}</td>
                     <td className="px-4 py-3 text-center">
@@ -304,8 +302,8 @@ export default function CorporatePortfolioMatrix() {
                   <div key={asset.asset_id} className="bg-gray-800/30 border border-gray-700 rounded-lg p-4">
                     <div className="flex items-start justify-between mb-2">
                       <div>
-                        <h3 className="font-bold text-white">{asset.asset_name}</h3>
-                        <p className="text-sm text-gray-400">{asset.vendor} • {asset.current_version} → {asset.latest_safe_version}</p>
+                        <h3 className="font-bold text-white">{asset.vendor} {asset.product}</h3>
+                        <p className="text-sm text-gray-400">Current: <span className="font-mono">{asset.current_version}</span> → Upgrade to: <span className="font-mono text-green-400">{asset.latest_safe_version}</span></p>
                       </div>
                       <span className={`inline-block px-2 py-1 rounded text-xs font-bold border ${getSeverityColor(asset.severity_level)}`}>
                         {asset.severity_level}
